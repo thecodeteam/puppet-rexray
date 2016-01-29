@@ -1,0 +1,105 @@
+---
+rexray:
+  logLevel: warn
+  osDrivers:
+  - linux
+  volumeDrivers:
+  - docker
+  storageDrivers:
+<% @storage_drivers.each do |val| -%>
+  - <%= val %>
+<% end -%>
+<% if @storage_drivers.include?('ec2') -%>
+aws:
+  accessKey: <%= @aws_accesskey %>
+  secretKey: <%= @aws_secretkey %>
+  region: <%= @aws_region %>
+<% end -%>
+<% if @storage_drivers.include?('gce') -%>
+gce:
+  keyfile: <%= @gce_keyfile %>
+<% end -%>
+<% if @storage_drivers.include?('isilon') -%>
+isilon:
+  endpoint: <%= @isilon_endpoint %>
+  insecure: <%= @isilon_insecure %>
+  username: <%= @isilon_username %>
+  password: <%= @isilon_password %>
+  volumePath: <%= @isilon_volumePath %>
+<% end -%>
+<% if @storage_drivers.include?('openstack') -%>
+openstack:
+  authURL: <%= @os_authurl %>
+  userID: <%= @os_userid %>
+  userName: <%= @os_username %>
+  password: <%= @os_password %>
+  tenantID: <%= @os_tenantid %>
+  tenantName: <%= @os_tenantname %>
+  domainID: <%= @os_domainid %>
+  domainName: <%= @os_domainname %>
+  regionName: <%= @os_regionname %>
+<% end -%>
+<% if @storage_drivers.include?('rackspace') -%>
+rackspace:
+  authURL: <%= @rax_authurl %>
+  userID: <%= @rax_userid %>
+  userName: <%= @rax_username %>
+  password: <%= @rax_password %>
+  tenantID: <%= @rax_tenantid %>
+  tenantName: <%= @rax_tenantname %>
+  domainID: <%= @rax_domainid %>
+  domainName: <%= @rax_domainname %>
+<% end -%>
+<% if @storage_drivers.include?('scaleio') -%>
+scaleio:
+  endpoint: <%= @sio_endpoint %>
+  insecure: <%= @sio_insecure %>
+  useCerts: <%= @sio_usecerts %>
+  userName: <%= @sio_username %>
+  password: <%= @sio_password %>
+  systemID: <%= @sio_systemid %>
+  systemName: <%= @sio_systemname %>
+  protectionDomainID: <%= @sio_protectiondomainid %>
+  protectionDomainName: <%= @sio_protectiondomainname %>
+  storagePoolID: <%= @sio_storagepoolid %>
+  storagePoolName: <%= @sio_storagepoolname %>
+<% end -%>
+<% if @storage_drivers.include?('virtualbox') -%>
+virtualbox:
+  endpoint: <%= @vbox_endpoint %>
+  volumePath: <%= @vbox_volume_path %>
+  userName: <%= @vbox_user %>
+  password: <%= @vbox_pass %>
+  tls: <%= @vbox_tls %>
+  controllerName: <%= @vbox_controller_name %>
+  localMachineNameOrId: <%= @vbox_machine %>
+<% end -%>
+<% if @storage_drivers.include?('vmax') -%>
+vmax:
+  smisHost: <%= @vmax_smisHost %>
+  smisPort: <%= @vmax_smisPort %>
+  insecure: <%= @vmax_insecure %>
+  username: <%= @vmax_username %>
+  password: <%= @vmax_password %>
+  sid: <%= @vmax_sid %>
+  volumePrefix: <%= @vmax_volumePrefix %>
+  storageGroup: <%= @vmax_storageGroup %>
+  mode: <%= @vmax_mode %>
+  <% if @vmax_mode == "vmh" %>
+  vmh:
+    host: <%= @vmax_vmh['host'] %>
+    username: <%= @vmax_vmh['username'] %>
+    password: <%= @vmax_vmh['password'] %>
+    insecure: <%= @vmax_vmh['insecure'] %>
+  <% end %>
+<% end -%>
+<% if @storage_drivers.include?('xtremio') -%>
+xtremio:
+  endpoint: <%= @xtremio_endpoint %>
+  userName: <%= @xtremio_userName %>
+  password: <%= @xtremio_password %>
+  insecure: <%= @xtremio_insecure %>
+  deviceMapper: <%= @xtremio_deviceMapper %>
+  multipath: <%= @xtremio_multipath %>
+  remoteManagement: <%= @xtremio_remoteManagement %>
+<% end -%>
