@@ -1,12 +1,12 @@
 {
-  "name": "codenrhoden-rexray",
+  "name": "emccode-rexray",
   "version": "0.1.0",
   "author": "Travis Rhoden",
   "summary": "Install REX-Ray with Puppet",
   "license": "Apache-2.0",
-  "source": "https://github.com/codenrhoden/puppet-rexray",
-  "project_page": "https://github.com/codenrhoden/puppet-rexray",
-  "issues_url": "https://github.com/codenrhoden/puppet-rexray/issues",
+  "source": "https://github.com/emccode/puppet-rexray",
+  "project_page": "https://github.com/emccode/puppet-rexray",
+  "issues_url": "https://github.com/emccode/puppet-rexray/issues",
   "dependencies": [
     {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
   ],
