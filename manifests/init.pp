@@ -15,6 +15,8 @@
 #                            but at least one must be specific to produce a working
 #                            installation.
 #
+# $config_template::         Alternate template in your puppet setup
+#
 # $aws_accesskey::
 # $aws_secretkey::
 # $aws_region::
@@ -91,6 +93,7 @@ class rexray (
   $install_channel          = $rexray::params::install_channel,
   $start_service            = $rexray::params::start_service,
   $storage_drivers          = $rexray::params::storage_drivers,
+  $config_template          = $rexray::params::config_template,
   $aws_accesskey            = $rexray::params::aws_accesskey,
   $aws_secretkey            = $rexray::params::aws_secretkey,
   $aws_region               = $rexray::params::aws_region,
@@ -176,7 +179,7 @@ class rexray (
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
-    content => template('rexray/config.yml.erb'),
+    content => template($config_template),
   }
 
   if $start_service {

@@ -4,6 +4,7 @@ class rexray::params {
   $install_channel  = 'stable'
   $start_service    = false
   $storage_drivers  = []
+  $config_template = 'rexray/config.yml.erb',
 
   # AWS EC2 Storage Driver
   $aws_accesskey =  ''
