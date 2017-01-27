@@ -186,6 +186,7 @@ class rexray (
     exec {'start-rexray':
       command => 'rexray service start',
       path    =>  '/usr/bin',
+      unless  => 'rexray service status',
       require => [ Exec['install-rexray'], File['/etc/rexray/config.yml'] ],
     }
   }
