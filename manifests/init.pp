@@ -163,8 +163,10 @@ class rexray (
   validate_bool($start_service)
   validate_array($storage_drivers)
 
-  package {'curl':
-    ensure => installed,
+  if !defined(Package['curl']) {
+    package {'curl':
+      ensure => installed,
+    }
   }
 
   exec {'install-rexray':
