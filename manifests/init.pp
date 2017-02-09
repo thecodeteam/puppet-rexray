@@ -195,7 +195,8 @@ class rexray (
   if $start_service {
     exec {'start-rexray':
       command => 'rexray service start',
-      path    =>  '/usr/bin',
+      path    =>  '/bin:/usr/bin',
+      unless  => 'ps aux | grep rexray | grep -v grep',
       require => [ Exec['install-rexray'], File['/etc/rexray/config.yml'] ],
     }
   }
