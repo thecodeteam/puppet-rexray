@@ -171,14 +171,14 @@ class rexray (
   if $install_version != '' {
     exec {'install-rexray':
       command => "curl -sSL https://dl.bintray.com/emccode/rexray/install | sh -s -- ${install_channel} ${install_version}",
-      path    => '/usr/bin',
+      path    => '/bin:/sbin:/usr/bin',
       require => Package['curl'],
       creates => '/usr/bin/rexray',
     }  
   } else {
     exec {'install-rexray':
       command => "curl -sSL https://dl.bintray.com/emccode/rexray/install | sh -s -- $install_channel",
-      path    => '/usr/bin',
+      path    => '/bin:/sbin:/usr/bin',
       require => Package['curl'],
       creates => '/usr/bin/rexray',
     }  
