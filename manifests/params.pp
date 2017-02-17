@@ -2,6 +2,7 @@
 
 class rexray::params {
   $install_channel  = 'stable'
+  $install_version = ''
   $start_service    = false
   $storage_drivers  = []
   $config_template = 'rexray/config.yml.erb'

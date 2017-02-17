@@ -8,6 +8,9 @@
 #
 # $install_channel::         Specify REX-Ray channel to install from.
 #                            One of 'stable', 'unstable', 'staged'.
+# 
+# $install_version::         Specify an exact version to install.  If not specified, 
+#                            defaults to the latest from the channel
 #
 # $start_service::           Whether to enable and start REX-Ray as a service
 #
@@ -91,6 +94,7 @@
 #
 class rexray (
   $install_channel          = $rexray::params::install_channel,
+  $install_version          = $rexray::params::install_version,
   $start_service            = $rexray::params::start_service,
   $storage_drivers          = $rexray::params::storage_drivers,
   $config_template          = $rexray::params::config_template,
@@ -169,11 +173,20 @@ class rexray (
     }
   }
 
-  exec {'install-rexray':
-    command => 'curl -sSL https://dl.bintray.com/emccode/rexray/install | sh -s $install_channel - ',
-    path    => '/usr/bin',
-    require => Package['curl'],
-    creates => '/usr/bin/rexray',
+  if $install_version != '' {
+    exec {'install-rexray':
+      command => "curl -sSL https://dl.bintray.com/emccode/rexray/install | sh -s -- ${install_channel} ${install_version}",
+      path    => '/bin:/sbin:/usr/bin',
+      require => Package['curl'],
+      creates => '/usr/bin/rexray',
+    }  
+  } else {
+    exec {'install-rexray':
+      command => "curl -sSL https://dl.bintray.com/emccode/rexray/install | sh -s -- $install_channel",
+      path    => '/bin:/sbin:/usr/bin',
+      require => Package['curl'],
+      creates => '/usr/bin/rexray',
+    }  
   }
 
   file {'/etc/rexray/config.yml':
